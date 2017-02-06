@@ -1,5 +1,3 @@
-// ScaleableUniverseTest.cpp : Defines the entry point for the console application.
-//
 #pragma once
 
 #include "stdafx.h"
@@ -10,6 +8,7 @@ using namespace ScaleableUniverseTest;
 
 int main()
 {
+
 	assert(Matrix3Tests::identityTest());
 
 	assert(Matrix3Tests::matrixInverseTest(100));
