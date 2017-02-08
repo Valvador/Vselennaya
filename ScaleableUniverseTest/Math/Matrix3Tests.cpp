@@ -4,15 +4,14 @@
 #include "Source/Math/Fmath.h"
 #include "Source/Math/Matrix3.h"
 
-using namespace ScaleableUniverse;
 
 namespace ScaleableUniverseTest
 {
 	// Helper Functions
-	Matrix3 Matrix3Tests::getRandomMatrix()
+	ScaleableUniverse::Matrix3 Matrix3Tests::getRandomMatrix()
 	{
 		srand((unsigned int)time(NULL));
-		Matrix3 result;
+		ScaleableUniverse::Matrix3 result;
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
@@ -27,7 +26,7 @@ namespace ScaleableUniverseTest
 	// TESTS
 	bool Matrix3Tests::identityTest()
 	{
-		Matrix3 identity = Matrix3::identity();
+		ScaleableUniverse::Matrix3 identity = ScaleableUniverse::Matrix3::identity();
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
@@ -35,12 +34,12 @@ namespace ScaleableUniverseTest
 				float cVal = identity.Get(i, j);
 				if ((i == j))
 				{
-					if (!fEquals(cVal, 1))
+					if (!ScaleableUniverse::fEquals(cVal, 1))
 						return false;
 				}
 				else
 				{
-					if (!fEquals(cVal, 0))
+					if (!ScaleableUniverse::fEquals(cVal, 0))
 					{
 						return false;
 					}
@@ -55,14 +54,14 @@ namespace ScaleableUniverseTest
 	{
 		for (int i = 0; i < numTimes; i++)
 		{
-			Matrix3 currentMatrix;
+			ScaleableUniverse::Matrix3 currentMatrix;
 			// Generate a Random 3x3 Matrix
-			while (fEquals(currentMatrix.determinant(), 0))
+			while (ScaleableUniverse::fEquals(currentMatrix.determinant(), 0))
 			{
 				currentMatrix = getRandomMatrix();
 			}
 
-			bool testResult = Matrix3::identity().matrixFEquals((currentMatrix * currentMatrix.inverse()), 1E-5);
+			bool testResult = ScaleableUniverse::Matrix3::identity().matrixFEquals((currentMatrix * currentMatrix.inverse()), 1E-5);
 			if (!testResult)
 			{
 				return false;
