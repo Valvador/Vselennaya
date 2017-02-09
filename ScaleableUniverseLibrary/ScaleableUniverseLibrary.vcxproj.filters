@@ -66,12 +66,24 @@
     <ClInclude Include="Source\Math\Fmath.h">
       <Filter>Source Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Util\Guid.h">
+      <Filter>Source Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SimWorld\World.h">
+      <Filter>Source Files\SimWorld</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\SimWorld\Actor.cpp">
+      <Filter>Source Files\SimWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util\Guid.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SimWorld\World.cpp">
       <Filter>Source Files\SimWorld</Filter>
     </ClCompile>
   </ItemGroup>
