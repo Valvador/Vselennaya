@@ -136,6 +136,7 @@
     <ClInclude Include="Source\Math\Fmath.h" />
     <ClInclude Include="Source\Math\Matrix3.h" />
     <ClInclude Include="Source\SimWorld\Actor.h" />
+    <ClInclude Include="Source\SimWorld\Simulator.h" />
     <ClInclude Include="Source\SimWorld\World.h" />
     <ClInclude Include="Source\ThirdParty\Math3DLib\MathLib3D.h" />
     <ClInclude Include="Source\ThirdParty\Math3DLib\MathUtils.h" />

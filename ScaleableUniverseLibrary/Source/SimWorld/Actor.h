@@ -17,6 +17,12 @@ namespace ScaleableUniverse
 		Vector3D angularVelocity;
 
 	public:
+		// Constructors
 		Actor();
+
+		// Data Access
+		void updateCoords(const Vector3D& position, const Matrix3& rotation);
+		void updateVelocities(const Vector3D& linVel, const Vector3D& angularVel);
+		void updatePhysics(const Vector3D& position, const Matrix3& rotation, const Vector3D& linVel, const Vector3D& angularVel);
 	};
 };

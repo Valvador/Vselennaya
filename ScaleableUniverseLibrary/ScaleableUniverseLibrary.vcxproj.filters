@@ -72,6 +72,9 @@
     <ClInclude Include="Source\SimWorld\World.h">
       <Filter>Source Files\SimWorld</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SimWorld\Simulator.h">
+      <Filter>Source Files\SimWorld</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
