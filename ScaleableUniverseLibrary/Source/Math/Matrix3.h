@@ -8,7 +8,7 @@
 
 using namespace PGSSOlver;
 using namespace MATHLIB3D;
-namespace ScaleableUniverse
+namespace SAU
 {
 	//-------------------------------------------------------------------------------------------------
 	// Class Definition

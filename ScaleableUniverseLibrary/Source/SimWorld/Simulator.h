@@ -1,6 +1,6 @@
 #include <vector>
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	class Actor;
 

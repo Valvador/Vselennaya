@@ -1,18 +1,16 @@
-#pragma once
-
-#include "stdafx.h"
+#include "Matrix3Tests.h"
+#include "Matrix3Tests.cpp"		// This is horse shit. If I don't include the .cpp, main tries to use functions without their defition.
 #include <assert.h>
-#include "Math/Matrix3Tests.h"
+#include <tchar.h>
 
-using namespace ScaleableUniverseTest;
 
-int main()
+int _tmain(int argc, _TCHAR* argv[])
 {
-
-	assert(Matrix3Tests::identityTest());
-
-	assert(Matrix3Tests::matrixInverseTest(100));
-
+	bool identityTestSuccess = SAUTest::Matrix3Tests::identityTest();
+	assert(identityTestSuccess);
+	bool inverseTestSuccess = SAUTest::Matrix3Tests::matrixInverseTest(100);
+	assert(inverseTestSuccess);
 	return 0;
 }
+
 

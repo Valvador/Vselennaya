@@ -2,7 +2,7 @@
 #include <vector>
 #include "Simulator.h"
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	class Actor;
 	

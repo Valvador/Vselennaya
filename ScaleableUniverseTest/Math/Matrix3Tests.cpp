@@ -1,74 +1,70 @@
-#include "stdafx.h"
-
 #include "Matrix3Tests.h"
 #include "Source/Math/Fmath.h"
 #include "Source/Math/Matrix3.h"
 
 
-namespace ScaleableUniverseTest
+
+// Helper Functions
+SAU::Matrix3 SAUTest::Matrix3Tests::getRandomMatrix()
 {
-	// Helper Functions
-	ScaleableUniverse::Matrix3 Matrix3Tests::getRandomMatrix()
+	srand((unsigned int)time(NULL));
+	SAU::Matrix3 result;
+	for (int i = 0; i < 3; i++)
 	{
-		srand((unsigned int)time(NULL));
-		ScaleableUniverse::Matrix3 result;
-		for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
 		{
-			for (int j = 0; j < 3; j++)
-			{
-				result.Set(i, j) = (rand() % 100 + 1) / 10.f;
-			}
+			result.Set(i, j) = (rand() % 100 + 1) / 10.f;
 		}
-
-		return result;
 	}
 
-	// TESTS
-	bool Matrix3Tests::identityTest()
+	return result;
+}
+
+// TESTS
+bool SAUTest::Matrix3Tests::identityTest()
+{
+	SAU::Matrix3 identity = SAU::Matrix3::identity();
+	for (int i = 0; i < 3; i++)
 	{
-		ScaleableUniverse::Matrix3 identity = ScaleableUniverse::Matrix3::identity();
-		for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
 		{
-			for (int j = 0; j < 3; j++)
+			float cVal = identity.Get(i, j);
+			if ((i == j))
 			{
-				float cVal = identity.Get(i, j);
-				if ((i == j))
+				if (!SAU::fEquals(cVal, 1))
+					return false;
+			}
+			else
+			{
+				if (!SAU::fEquals(cVal, 0))
 				{
-					if (!ScaleableUniverse::fEquals(cVal, 1))
-						return false;
-				}
-				else
-				{
-					if (!ScaleableUniverse::fEquals(cVal, 0))
-					{
-						return false;
-					}
+					return false;
 				}
 			}
 		}
-
-		return true;
 	}
 
-	bool Matrix3Tests::matrixInverseTest(int numTimes)
-	{
-		for (int i = 0; i < numTimes; i++)
-		{
-			ScaleableUniverse::Matrix3 currentMatrix;
-			// Generate a Random 3x3 Matrix
-			while (ScaleableUniverse::fEquals(currentMatrix.determinant(), 0))
-			{
-				currentMatrix = getRandomMatrix();
-			}
+	return true;
+}
 
-			bool testResult = ScaleableUniverse::Matrix3::identity().matrixFEquals((currentMatrix * currentMatrix.inverse()), 1E-5);
-			if (!testResult)
-			{
-				return false;
-			}
+bool SAUTest::Matrix3Tests::matrixInverseTest(int numTimes)
+{
+	for (int i = 0; i < numTimes; i++)
+	{
+		SAU::Matrix3 currentMatrix;
+		// Generate a Random 3x3 Matrix
+		while (SAU::fEquals(currentMatrix.determinant(), 0))
+		{
+			currentMatrix = getRandomMatrix();
 		}
 
-		return true;
+		bool testResult = SAU::Matrix3::identity().matrixFEquals((currentMatrix * currentMatrix.inverse()), 1E-5);
+		if (!testResult)
+		{
+			return false;
+		}
 	}
 
-};
+	return true;
+}
+

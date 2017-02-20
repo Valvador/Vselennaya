@@ -2,7 +2,7 @@
 #include "../Math/Matrix3.h"
 #include "../ThirdParty/Math3DLib/Vector3D.h"
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	class Actor
 	{

@@ -2,7 +2,7 @@
 #include "Guid.h"
 #include <assert.h>
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	void GuidGenerator::initGuidGen()
 	{

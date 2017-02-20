@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	class GuidGenerator
 	{

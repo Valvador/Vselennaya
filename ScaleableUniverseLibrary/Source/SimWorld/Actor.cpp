@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "../Util/Guid.h"
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	// Constructors
 	Actor::Actor() : 

@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{1bdd7f1d-1b0b-4c1a-b168-41df7dd5bbac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{c48a5155-499a-411d-8c2c-a911d2ae3af4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -75,6 +78,12 @@
     <ClInclude Include="Source\SimWorld\Simulator.h">
       <Filter>Source Files\SimWorld</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Network\Net.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Network\ConnectionClient.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -88,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="Source\SimWorld\World.cpp">
       <Filter>Source Files\SimWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\ConnectionClient.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

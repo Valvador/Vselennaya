@@ -2,7 +2,7 @@
 #include "World.h"
 
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	void World::stepWorld()
 	{

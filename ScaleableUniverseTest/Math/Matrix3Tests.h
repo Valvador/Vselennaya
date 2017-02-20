@@ -1,20 +1,20 @@
-#pragma once
+#ifndef Matrix3Test_H
+#define Matrix3Test_H
 
-#include "stdafx.h"
 #include <stdlib.h>
 #include <time.h>
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	class Matrix3;
 }
-namespace ScaleableUniverseTest
+namespace SAUTest
 {
 	class Matrix3Tests
 	{
 	private:
 		// Helper Functions
-		static ScaleableUniverse::Matrix3 getRandomMatrix();
+		static SAU::Matrix3 getRandomMatrix();
 
 	public:
 		// TESTS
@@ -22,3 +22,5 @@ namespace ScaleableUniverseTest
 		static bool matrixInverseTest(int numTimes);
 	};
 }
+
+#endif

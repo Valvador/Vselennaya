@@ -1,7 +1,7 @@
 #pragma once
 #include <limits>
 
-namespace ScaleableUniverse
+namespace SAU
 {
 	static bool fEquals(float a, float b, float epsilon = -1.0)
 	{
