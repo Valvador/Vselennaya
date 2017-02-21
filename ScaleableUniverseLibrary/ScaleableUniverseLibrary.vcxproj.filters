@@ -81,7 +81,7 @@
     <ClInclude Include="Source\Network\Net.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Network\ConnectionClient.h">
+    <ClInclude Include="Source\Network\ReplicationInterface.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
@@ -98,7 +98,10 @@
     <ClCompile Include="Source\SimWorld\World.cpp">
       <Filter>Source Files\SimWorld</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Network\ConnectionClient.cpp">
+    <ClCompile Include="Source\Network\ReplicationInterface.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\Net.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>

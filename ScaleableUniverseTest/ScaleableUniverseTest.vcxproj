@@ -147,11 +147,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Network\NetworkTest.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\Matrix3Tests.cpp" />
     <ClCompile Include="Math\Matrix3Tests.h" />
+    <ClCompile Include="Network\NetworkTest.cpp" />
     <ClCompile Include="ScaleableUniverseTest.cpp" />
   </ItemGroup>
   <ItemGroup>

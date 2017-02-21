@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{80fd634f-6d89-42b5-9ef5-a50bb47e8b5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{a5ac4f01-37ff-4a24-85e4-d3ddf7779838}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -23,6 +26,9 @@
   <ItemGroup>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetworkTest.h">
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="Math\Matrix3Tests.h">
       <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetworkTest.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

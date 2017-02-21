@@ -45,24 +45,14 @@
 #include <map>
 #include <stack>
 
+
+namespace SAU
+{
+	class ReplicationInterface;		// We will create a replicator attached to each Client as an Interface
+}
+
 namespace net
 {
-	// platform independent wait for n seconds
-
-#if PLATFORM == PLATFORM_WINDOWS
-
-	void wait_seconds( float seconds )
-	{
-		Sleep( (int) ( seconds * 1000.0f ) );
-	}
-
-#else
-
-	#include <unistd.h>
-	void wait_seconds( float seconds ) { usleep( (int) ( seconds * 1000000.0f ) ); }
-
-#endif
-
 	// internet address
 
 	class Address
@@ -352,8 +342,6 @@ namespace net
 			ClearData();
 			socket.Close();
 			running = false;
-			if ( connected )
-				OnDisconnect();
 			OnStop();
 		}
 		
@@ -362,29 +350,8 @@ namespace net
 			return running;
 		}
 		
-		void Listen()
-		{
-			printf( "server listening for connection\n" );
-			bool connected = IsConnected();
-			ClearData();
-			if ( connected )
-				OnDisconnect();
-			mode = Server;
-			state = Listening;
-		}
-		
-		void Connect( const Address & address )
-		{
-			printf( "client connecting to %d.%d.%d.%d:%d\n", 
-				address.GetA(), address.GetB(), address.GetC(), address.GetD(), address.GetPort() );
-			bool connected = IsConnected();
-			ClearData();
-			if ( connected )
-				OnDisconnect();
-			mode = Client;
-			state = Connecting;
-			this->address = address;
-		}
+		void Listen();		
+		void Connect(const Address & address);
 		
 		bool IsConnecting() const
 		{
@@ -411,94 +378,10 @@ namespace net
 			return mode;
 		}
 		
-		virtual void Update( float deltaTime )
-		{
-			assert( running );
-			timeoutAccumulator += deltaTime;
-			if ( timeoutAccumulator > timeout )
-			{
-				if ( state == Connecting )
-				{
-					printf( "connect timed out\n" );
-					ClearData();
-					state = ConnectFail;
-					OnDisconnect();
-				}
-				else if ( state == Connected )
-				{
-					printf( "connection timed out\n" );
-					ClearData();
-					if ( state == Connecting )
-						state = ConnectFail;
-					OnDisconnect();
-				}
-			}
-		}
-		
-		virtual bool SendPacket( const unsigned char data[], int size )
-		{
-			assert( running );
-			if ( address.GetAddress() == 0 )
-				return false;
-			unsigned char* packet = new unsigned char[size+4];
-			packet[0] = (unsigned char) ( protocolId >> 24 );
-			packet[1] = (unsigned char) ( ( protocolId >> 16 ) & 0xFF );
-			packet[2] = (unsigned char) ( ( protocolId >> 8 ) & 0xFF );
-			packet[3] = (unsigned char) ( ( protocolId ) & 0xFF );
-			memcpy( &packet[4], data, size );
-			bool res = socket.Send( address, packet, size + 4 );
-			delete [] packet;
-			return res;
-		}
-		
-		virtual int ReceivePacket( unsigned char data[], int size )
-		{
-			assert( running );
-			unsigned char* packet = new unsigned char[size+4];
-			Address sender;
-			int bytes_read = socket.Receive( sender, packet, size + 4 );
-			if ( bytes_read == 0 )
-			{
-				delete [] packet;
-				return 0;
-			}
-			if ( bytes_read <= 4 )
-			{
-				delete [] packet;
-				return 0;
-			}
-			if ( packet[0] != (unsigned char) ( protocolId >> 24 ) || 
-				 packet[1] != (unsigned char) ( ( protocolId >> 16 ) & 0xFF ) ||
-				 packet[2] != (unsigned char) ( ( protocolId >> 8 ) & 0xFF ) ||
-				 packet[3] != (unsigned char) ( protocolId & 0xFF ) )
-			{
-				delete [] packet;
-				return 0;
-			}
-			if ( mode == Server && !IsConnected() )
-			{
-				printf( "server accepts connection from client %d.%d.%d.%d:%d\n", 
-					sender.GetA(), sender.GetB(), sender.GetC(), sender.GetD(), sender.GetPort() );
-				state = Connected;
-				address = sender;
-				OnConnect();
-			}
-			if ( sender == address )
-			{
-				if ( mode == Client && state == Connecting )
-				{
-					printf( "client completes connection with server\n" );
-					state = Connected;
-					OnConnect();
-				}
-				timeoutAccumulator = 0.0f;
-				memcpy( data, &packet[4], size - 4 );
-				delete [] packet;
-				return size - 4;
-			}
-			delete [] packet;
-			return 0;
-		}
+		virtual void Update(float deltaTime);		
+		virtual bool SendPacket		(Address destination, const unsigned char data[], int size);
+		virtual bool BroadcastPacket(const unsigned char data[], int size);
+		virtual int ReceivePacket(unsigned char data[], int size);
 		
 		int GetHeaderSize() const
 		{
@@ -507,19 +390,14 @@ namespace net
 		
 	protected:
 		
-		virtual void OnStart()		{}
-		virtual void OnStop()		{}
-		virtual void OnConnect()    {}
-		virtual void OnDisconnect() {}
+		virtual void OnStart()												{}
+		virtual void OnStop()												{}
+		virtual void OnConnect(std::pair<Address, SAU::ReplicationInterface*> connection);
+		virtual void OnDisconnect(std::pair<Address, SAU::ReplicationInterface*> connection);
 			
 	private:
 		
-		void ClearData()
-		{
-			state = Disconnected;
-			timeoutAccumulator = 0.0f;
-			address = Address();
-		}
+		void ClearData();
 	
 		enum State
 		{
@@ -537,8 +415,7 @@ namespace net
 		Mode mode;
 		State state;
 		Socket socket;
-		float timeoutAccumulator;
-		Address address;
+		std::map<Address, SAU::ReplicationInterface*> addressMap;
 	};
 }
 
