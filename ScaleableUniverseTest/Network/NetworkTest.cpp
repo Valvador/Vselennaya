@@ -1,5 +1,6 @@
-#include "Source/Network/Net.h"
 #include "NetworkTest.h"
+#include "Source/Network/ServerConnection.h"
+#include "Source/Network/ClientConnection.h"
 
 namespace SAU
 {
@@ -20,8 +21,8 @@ namespace SAU
 		const float DeltaTime = 0.001f;
 		const float TimeOut = 1.5f;
 
-		net::Connection client(ProtocolId, TimeOut);
-		net::Connection server(ProtocolId, TimeOut);
+		ClientConnection client(ProtocolId, TimeOut);
+		ServerConnection server(ProtocolId, TimeOut);
 
 		bool clientStart = (client.Start(ClientPort));
 		bool serverStart = (server.Start(ServerPort));
@@ -49,10 +50,10 @@ namespace SAU
 				break;
 
 			unsigned char client_packet[] = "client to server";
-			client.BroadcastPacket(client_packet, sizeof(client_packet));
+			client.SendPacket(client_packet, sizeof(client_packet));
 
 			unsigned char server_packet[] = "server to client";
-			server.BroadcastPacket(server_packet, sizeof(server_packet));
+			server.SendPacket(server_packet, sizeof(server_packet));
 
 			while (true)
 			{

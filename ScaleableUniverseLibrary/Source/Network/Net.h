@@ -314,7 +314,7 @@ namespace net
 			this->timeout = timeout;
 			mode = None;
 			running = false;
-			ClearData();
+			Reset();
 		}
 		
 		virtual ~Connection()
@@ -339,7 +339,7 @@ namespace net
 			assert( running );
 			printf( "stop connection\n" );
 			bool connected = IsConnected();
-			ClearData();
+			Reset();
 			socket.Close();
 			running = false;
 			OnStop();
@@ -363,7 +363,7 @@ namespace net
 			return state == ConnectFail;
 		}
 		
-		bool IsConnected() const
+		virtual bool IsConnected() const
 		{
 			return state == Connected;
 		}
@@ -372,33 +372,53 @@ namespace net
 		{
 			return state == Listening;
 		}
+
+		void SetIsConnected()
+		{
+			state = Connected;
+		}
+
+		void SetIsDisconnected()
+		{
+			state = Disconnected;
+		}
 		
 		Mode GetMode() const
 		{
 			return mode;
 		}
+
+		float GetTimeout() const
+		{
+			return timeout;
+		}
+
+		// Base Virtual
+		virtual bool SendPacket(Address destination, const unsigned char data[], int size);
+		virtual int  ReceivePacket(unsigned char data[], int size);
 		
-		virtual void Update(float deltaTime);		
-		virtual bool SendPacket		(Address destination, const unsigned char data[], int size);
-		virtual bool BroadcastPacket(const unsigned char data[], int size);
-		virtual int ReceivePacket(unsigned char data[], int size);
-		
+		// Pure Virtual
+		virtual void Update(float deltaTime) = 0;
+		virtual bool SendPacket(const unsigned char data[], int size) = 0;
+
 		int GetHeaderSize() const
 		{
 			return 4;
 		}
 		
-	protected:
-		
-		virtual void OnStart()												{}
-		virtual void OnStop()												{}
-		virtual void OnConnect(std::pair<Address, SAU::ReplicationInterface*> connection);
-		virtual void OnDisconnect(std::pair<Address, SAU::ReplicationInterface*> connection);
+	protected:	
+		virtual void OnStart(){}
+		virtual void OnStop(){}
+		virtual bool OnPacketSending(Address& destination, const unsigned char data[])	{ return true; }
+		virtual bool OnPacketSent(Address& destination, unsigned char packet[])		{ return true; }
+		virtual bool OnPacketReceiving(Address& source, unsigned char packet[])		{ return true; }
+		virtual bool OnPacketReceived(Address& address, const unsigned char data[])		{ return true; }
+		virtual void OnConnect(std::pair<Address, SAU::ReplicationInterface*> connection) = 0;
+		virtual void OnDisconnect(std::pair<Address, SAU::ReplicationInterface*> connection) = 0;
 			
-	private:
-		
-		void ClearData();
-	
+		unsigned int protocolId;
+		float timeout;
+
 		enum State
 		{
 			Disconnected,
@@ -408,14 +428,13 @@ namespace net
 			Connected
 		};
 
-		unsigned int protocolId;
-		float timeout;
-		
 		bool running;
 		Mode mode;
 		State state;
 		Socket socket;
-		std::map<Address, SAU::ReplicationInterface*> addressMap;
+	private:	
+		virtual void Reset() {};
+
 	};
 }
 

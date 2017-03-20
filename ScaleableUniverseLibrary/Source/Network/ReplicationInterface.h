@@ -17,10 +17,11 @@ namespace SAU
 
 		// Virtual Methods
 		virtual void processPacket(const unsigned char data[]);
-		virtual void update();
+		virtual void update(float deltaTime);
 	private:
 		float timeout;
 		float timeoutAccumulator;
+		net::Address destinationAddress;
 	};
 }
 

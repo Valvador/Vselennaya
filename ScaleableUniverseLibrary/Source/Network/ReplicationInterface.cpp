@@ -30,7 +30,7 @@ namespace SAU
 		timeoutAccumulator = 0.0f;
 	}
 
-	void ReplicationInterface::update()
+	void ReplicationInterface::update(float deltaTime)
 	{
 
 	}
