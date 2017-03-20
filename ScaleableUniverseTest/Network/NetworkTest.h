@@ -9,7 +9,7 @@ namespace SAU
 	public:
 		static bool initializeSockets();
 		static bool singleConnectionTest();
-		static bool multiConnectionTest(int numClients);
+		static bool multiConnectionTest();
 	};
 }
 

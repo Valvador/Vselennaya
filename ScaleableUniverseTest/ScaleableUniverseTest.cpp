@@ -1,8 +1,10 @@
 #include "Matrix3Tests.h"
-#include "Matrix3Tests.cpp"		// This is horse shit. If I don't include the .cpp, main tries to use functions without their defition.
+//#include "Matrix3Tests.cpp"		// This is horse shit. If I don't include the .cpp, main tries to use functions without their defition.
 #include "Network/NetworkTest.h"
+//#include "Network/NetworkTest.cpp"
 #include <assert.h>
 #include <tchar.h>
+#include <stdio.h>
 
 #ifdef DEBUG
 #define check assert
@@ -25,7 +27,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 1;
 	}
 	check(SAU::NetworkTest::singleConnectionTest());
-	check(SAU::NetworkTest::multiConnectionTest(6));
+	check(SAU::NetworkTest::multiConnectionTest());
 
 
 
