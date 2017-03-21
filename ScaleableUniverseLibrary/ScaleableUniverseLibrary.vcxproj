@@ -135,8 +135,10 @@
     <ClInclude Include="Source\Math\DMatrix.h" />
     <ClInclude Include="Source\Math\Fmath.h" />
     <ClInclude Include="Source\Math\Matrix3.h" />
+    <ClInclude Include="Source\Network\ClientConnection.h" />
     <ClInclude Include="Source\Network\ReplicationInterface.h" />
     <ClInclude Include="Source\Network\Net.h" />
+    <ClInclude Include="Source\Network\ServerConnection.h" />
     <ClInclude Include="Source\SimWorld\Actor.h" />
     <ClInclude Include="Source\SimWorld\Simulator.h" />
     <ClInclude Include="Source\SimWorld\World.h" />
@@ -150,8 +152,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Network\ClientConnection.cpp" />
     <ClCompile Include="Source\Network\Net.cpp" />
     <ClCompile Include="Source\Network\ReplicationInterface.cpp" />
+    <ClCompile Include="Source\Network\ServerConnection.cpp" />
     <ClCompile Include="Source\SimWorld\Actor.cpp" />
     <ClCompile Include="Source\SimWorld\World.cpp" />
     <ClCompile Include="Source\Util\Guid.cpp" />

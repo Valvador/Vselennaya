@@ -84,6 +84,12 @@
     <ClInclude Include="Source\Network\ReplicationInterface.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Network\ClientConnection.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Network\ServerConnection.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -102,6 +108,12 @@
       <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="Source\Network\Net.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\ClientConnection.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\ServerConnection.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
