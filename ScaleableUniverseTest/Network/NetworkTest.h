@@ -10,6 +10,9 @@ namespace SAU
 		static bool initializeSockets();
 		static bool singleConnectionTest();
 		static bool multiConnectionTest();
+		
+		static bool singlePacketTest();
+		static bool doublePacketTest();
 	};
 }
 

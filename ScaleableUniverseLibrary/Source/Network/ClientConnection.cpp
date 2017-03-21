@@ -69,6 +69,7 @@ namespace SAU
 			}
 			
 			clientConnection.second->processPacket(data);
+			return true;
 		}
 
 		return false;

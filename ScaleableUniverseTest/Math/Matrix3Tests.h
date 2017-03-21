@@ -7,9 +7,6 @@
 namespace SAU
 {
 	class Matrix3;
-}
-namespace SAUTest
-{
 	class Matrix3Tests
 	{
 	private:

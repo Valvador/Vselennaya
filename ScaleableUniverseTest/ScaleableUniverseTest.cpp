@@ -15,9 +15,9 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	// MATH TESTS
-	bool identityTestSuccess = SAUTest::Matrix3Tests::identityTest();
+	bool identityTestSuccess = SAU::Matrix3Tests::identityTest();
 	check(identityTestSuccess);
-	bool inverseTestSuccess = SAUTest::Matrix3Tests::matrixInverseTest(100);
+	bool inverseTestSuccess = SAU::Matrix3Tests::matrixInverseTest(100);
 	check(inverseTestSuccess);
 
 	// NETWORK TESTS
@@ -28,7 +28,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	check(SAU::NetworkTest::singleConnectionTest());
 	check(SAU::NetworkTest::multiConnectionTest());
-
+	check(SAU::NetworkTest::singlePacketTest());
+	check(SAU::NetworkTest::doublePacketTest());
 
 
 	return 0;

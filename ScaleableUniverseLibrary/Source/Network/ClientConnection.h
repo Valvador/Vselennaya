@@ -12,6 +12,7 @@ namespace SAU
 		~ClientConnection();
 
 		/*override*/virtual void Update(float deltaTime);
+		/*override*/virtual bool SendPacket(net::Address address, const unsigned char data[], int size) { return net::Connection::SendPacket(address, data, size); }
 		/*override*/virtual bool SendPacket(const unsigned char data[], int size);
 	protected:
 		/*override*/virtual bool OnPacketReceived(net::Address& source, const unsigned char data[]);

@@ -5,7 +5,7 @@
 
 
 // Helper Functions
-SAU::Matrix3 SAUTest::Matrix3Tests::getRandomMatrix()
+SAU::Matrix3 SAU::Matrix3Tests::getRandomMatrix()
 {
 	srand((unsigned int)time(NULL));
 	SAU::Matrix3 result;
@@ -21,7 +21,7 @@ SAU::Matrix3 SAUTest::Matrix3Tests::getRandomMatrix()
 }
 
 // TESTS
-bool SAUTest::Matrix3Tests::identityTest()
+bool SAU::Matrix3Tests::identityTest()
 {
 	SAU::Matrix3 identity = SAU::Matrix3::identity();
 	for (int i = 0; i < 3; i++)
@@ -47,7 +47,7 @@ bool SAUTest::Matrix3Tests::identityTest()
 	return true;
 }
 
-bool SAUTest::Matrix3Tests::matrixInverseTest(int numTimes)
+bool SAU::Matrix3Tests::matrixInverseTest(int numTimes)
 {
 	for (int i = 0; i < numTimes; i++)
 	{

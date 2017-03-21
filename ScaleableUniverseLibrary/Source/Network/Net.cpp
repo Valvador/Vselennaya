@@ -20,32 +20,24 @@ namespace net
 	
 	void Connection::Listen()
 	{
-		assert(mode == Server);
-		if (mode == Server)
-		{
-			printf("server listening for connection\n");
-			bool connected = IsConnected();
-			Reset();
+		printf("server listening for connection\n");
+		bool connected = IsConnected();
+		Reset();
 
-			state = Listening;
-		}
+		state = Listening;
 	}
 
 	void Connection::Connect(const Address & address)
 	{
-		assert(mode == Client);
-		if (mode == Client)
-		{
-			printf("client connecting to %d.%d.%d.%d:%d\n",
-				address.GetA(), address.GetB(), address.GetC(), address.GetD(), address.GetPort());
-			bool connected = IsConnected();
-			Reset();
-			mode = Client;
-			state = Connecting;
+		printf("client connecting to %d.%d.%d.%d:%d\n",
+			address.GetA(), address.GetB(), address.GetC(), address.GetD(), address.GetPort());
+		bool connected = IsConnected();
+		Reset();
+		mode = Client;
+		state = Connecting;
 
-			std::pair<Address, SAU::ReplicationInterface*> serverInterface(address, new SAU::ReplicationInterface(timeout));
-			OnConnect(serverInterface);
-		}
+		std::pair<Address, SAU::ReplicationInterface*> serverInterface(address, new SAU::ReplicationInterface(timeout));
+		OnConnect(serverInterface);
 	}
 
 	// TODO: For now, this sends to EVERY connected client.
